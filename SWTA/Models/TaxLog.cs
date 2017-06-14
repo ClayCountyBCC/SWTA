@@ -40,11 +40,14 @@ namespace SWTA.Models
           building_units,
           collected_units,
           assessed_units,
-          Note,
+          CASE WHEN addedBy IS NOT NULL 
+            THEN Note + ' -- Added by: ' + addedBy
+            ELSE Note
+          END Note,
           addedOn,
           ISNULL(addedBy, '') AS addedBy
         FROM TaxLog
-          WHERE PID=@Parcel
+          WHERE PID=@PID
           ORDER BY addedOn DESC";
 
       var d = new DynamicParameters();
