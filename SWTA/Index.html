@@ -1,0 +1,351 @@
+﻿<!DOCTYPE html>
+<html ng-app="SolidWasteApp">
+<head>
+  <title>Solid Waste Tax Assessment</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=11">
+  <script src="Scripts/angular.min.js"></script>  
+  <link href="Content/angular-material.min.css" rel="stylesheet" />
+  <link href="Content/main.css" rel="stylesheet" />
+</head>
+<body ng-cloak
+      layout="column"
+      layout-align="start start"
+      ng-controller="MainController as main">
+
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>
+        Solid Waste Tax Assessment
+      </h2>
+      <div layout="row"
+           layout-align="center center"
+           ng-if="main.showProgress"
+           flex>
+        <md-progress-circular md-diameter="60"
+                              class="md-warn"
+                              ng-if="main.showProgress"
+                              md-mode="indeterminate">
+        </md-progress-circular>
+        <h3>
+          Loading data, please wait.
+        </h3>
+      </div>
+      <span ng-if="!main.showProgress && main.currentFilter.length == 0"
+            flex>
+      </span>
+
+      <h2 ng-if="!main.showProgress && main.currentFilter.length > 0"
+            flex>
+        Filtering By - {{ main.currentFilter }}
+      </h2>
+      <md-button ng-click="main.showReports()">
+        Reports
+      </md-button>
+      <md-button ng-click="main.showFilters()">
+        Filters
+      </md-button>
+      <span flex="5"></span>
+    </div>
+  </md-toolbar>
+
+
+
+  <md-sidenav md-component-id="filterRight"
+              class="md-sidenav-right md-whiteframe-z2">
+    <section>
+      <md-toolbar class="md-primary md-hue-2">
+        <div class="md-toolbar-tools">
+          <h1 flex>
+            Overall Filters
+          </h1>
+        </div>
+      </md-toolbar>
+      <md-list layout="column"
+               layout-padding>
+        <md-item>
+          <md-button ng-click="main.filterQuery('Hardship', 3)">
+            Hardship
+          </md-button>
+        </md-item>
+        <md-item>
+          <md-button ng-click="main.filterQuery('Veteran', 4)">
+            Veteran
+          </md-button>
+        </md-item>
+        <md-item>
+          <md-button ng-click="main.filterQuery('Reclassified', 10)">
+            Reclassified
+          </md-button>
+        </md-item>
+      </md-list>
+      <md-toolbar class="md-primary md-hue-2">
+        <div class="md-toolbar-tools">
+          <h1 flex>
+            Year to Year Filters
+          </h1>
+        </div>
+      </md-toolbar>
+      <md-list layout="column"
+               layout-padding>
+        <md-item>
+          <md-button ng-click="main.filterQuery('Difference Year to Year', 5)">
+            Difference from Year to Year
+          </md-button>
+        </md-item>
+        <md-item>
+          <md-button ng-click="main.filterQuery('New Parcels', 8)">
+            New Parcels
+          </md-button>
+        </md-item>
+        <md-item>
+          <md-button ng-click="main.filterQuery('New Parcels - No CoDate', 11)">
+            New Parcels - No CoDate
+          </md-button>
+        </md-item>
+        <md-item>
+          <md-button ng-click="main.filterQuery('Parcels removed this year', 9)">
+            Parcels not found this year
+          </md-button>
+        </md-item>
+
+      </md-list>
+
+    </section>
+
+  </md-sidenav>
+
+  <md-sidenav md-component-id="reportRight"
+              class="md-sidenav-right md-whiteframe-z2">
+    <section>
+      <md-toolbar class="md-primary md-hue-2">
+        <div class="md-toolbar-tools">
+          <h1 flex>
+            Reports
+          </h1>
+        </div>
+      </md-toolbar>
+      <md-list layout="column"
+               layout-padding>
+        <md-item>
+          <a target="_blank"
+             href="http://claybccmscsql/ReportServer/Pages/ReportViewer.aspx?%2FSolidWasteReports%2FSolidWasteRoll">
+            Solid Waste Roll
+          </a>
+        </md-item>
+      </md-list>
+
+    </section>
+
+  </md-sidenav>
+
+  <div style="height: calc(100% - 64px); width: 100%;"
+              layout="row"
+              layout-align="center start"
+              layout-wrap
+              flex="100">
+    
+    <form layout="row"
+          layout-align="center start"
+          flex="100"
+          layout-wrap
+          ng-submit="main.updateData()">
+
+      <md-toolbar style="margin-top: .5em;"
+                  flex="90"
+                  class="md-accent short md-whiteframe-z1">
+        <div class="md-toolbar-tools">
+
+          Settings
+          <span style="text-align: center;"
+                flex>
+            Record count: {{ main.assessmentData.length }}
+          </span>
+          <span ng-click="main.toggleSearch()"
+                style="font-size: smaller; cursor: pointer;">
+            Show / Hide
+          </span>
+          <span flex="5"></span>
+        </div>
+      </md-toolbar>
+
+      <div ng-if="main.showSearch"
+           class="md-whiteframe-z1"
+           layout-gt-sm="row"
+           layout="column"
+           layout-align="center center"
+           layout-wrap
+           flex="90">
+
+        <md-input-container flex-gt-md="30"
+                            flex-gt-sm="25"
+                            flex="100">
+          <label class="darker">Owner Name</label>
+          <input ng-model="main.filterOwner"
+                 type="text" />
+        </md-input-container>
+
+        <md-input-container flex-gt-md="30"
+                            flex-gt-sm="25"
+                            flex="100">
+          <label class="darker">Road</label>
+          <input ng-model="main.filterRoad"
+                 type="text" />
+        </md-input-container>
+
+        <md-input-container flex-gt-md="30"
+                            flex-gt-sm="25"
+                            flex="100">
+          <label class="darker">Parcel</label>
+          <input ng-model="main.filterParcel"
+                 type="text" />
+        </md-input-container>
+
+        <md-input-container md-no-autogrow
+                            flex-gt-md="30"
+                            flex-gt-sm="25"
+                            flex="100">
+          <label class="darker">Use Desc</label>
+          <input ng-model="main.filterUseDesc"
+                 type="text" />
+        </md-input-container>
+
+        <md-input-container flex-gt-md="30"
+                            flex-gt-sm="25">
+          <label class="darker">
+            Tax District
+          </label>
+          <input ng-model="main.filterDistrict"
+                 type="number" />
+        </md-input-container>
+
+        <md-input-container flex-gt-md="30"
+                            flex-gt-sm="25"
+                            flex="100">
+          <label class="darker">Notes</label>
+          <input ng-model="main.filterNotes"
+                 type="text" />
+        </md-input-container>
+
+        <div layout="row"
+             layout-align="center center"
+             layout-padding
+             flex="100">
+          <md-checkbox aria-label="Hide Reviewed"
+                       ng-model="main.filterAlreadyWorked">
+            Hide Reviewed
+            <md-tooltip>
+              If this is checked, it will hide anything that has a note added by a person (not the system).
+            </md-tooltip>
+          </md-checkbox>
+
+          <md-button ng-click="main.resetSearch()"
+                     class="md-accent md-raised">
+            Reset Search
+          </md-button>
+
+          <md-button ng-click="main.updateData()"
+                     class="md-primary md-raised">
+            Search
+          </md-button>
+        </div>
+        <input ng-hide="true" type="submit" />
+      </div>
+    </form>
+
+    <div style="margin-top: .5em;"
+         class="md-whiteframe-z1"
+         layout="row"
+         layout-align="center start"
+         layout-wrap         
+         flex="90">
+
+      <div style="border-bottom: 1px solid black;"
+           flex="100"
+           layout="row"
+           layout-align="center end">
+
+        <span flex="15">
+          PID
+        </span>
+        <span flex="20">
+          Owner Name
+        </span>
+        <span flex="10">
+          Use Desc
+        </span>
+        <span flex="5">
+          District
+        </span>
+        <span style="text-align: justify;"
+              flex="20">
+          Street
+        </span>
+        <span flex="15">
+          Notes
+        </span>
+        <span flex="15">
+          Bld / Col / Asd
+        </span>
+      </div>
+
+      <md-virtual-repeat-container style="height: 500px; width: 100%;"
+                                   md-auto-shrink-min="30"
+                                   md-auto-shrink
+                                   flex="100">
+        <div class="row"
+             ng-hide="main.assessmentData.length == 0"
+             md-virtual-repeat="ad in main.assessmentData"
+             md-item-size="30"
+             layout="row"
+             layout-align="center end"
+             layout-wrap
+             flex="100">
+
+          <span style="cursor: pointer;"
+                flex="15">
+            <a ng-click="main.showDetail($event, ad, $index)">
+              {{ ad.PID }}
+            </a>
+          </span>
+          <span flex="20">
+            {{ ad.OWNER_NAME }}
+          </span>
+          <span flex="10">
+            <a target="_blank"
+               ng-href="http://qpublic6.qpublic.net/fl_display_dw.php?county=fl_clay&KEY={{ ad.PIN_DSP }}">
+              {{ ad.USEDESC }}
+            </a>
+          </span>
+          <span flex="5">
+            {{ ad.TaxDist }}
+          </span>
+          <span style="text-align: justify;"
+                flex="20">
+            {{ ad.STREET }}
+          </span>
+          <span flex="15">
+            {{ ad.Notes }}
+          </span>
+          <span flex="15">
+            {{ ad.Building_Units }} / {{ ad.Collected_Units }} / {{ ad.Assessed_Units }}
+          </span>
+        </div>
+      </md-virtual-repeat-container>
+      
+
+
+    </div>
+  </div>
+
+  <script src="Scripts/angular-aria/angular-aria.min.js"></script>
+  <script src="Scripts/angular-animate/angular-animate.min.js"></script>
+  <script src="Scripts/angular-material/angular-material.min.js"></script>
+  <script src="Scripts/app/app.js"></script>
+  <script src="Scripts/app/main/main.controller.js"></script>
+  <script src="Scripts/app/data/appData.service.js"></script>
+  <script src="Scripts/app/detail/viewDetail.component.js"></script>
+  <script src="Scripts/app/dialog/dialog.controller.js"></script>
+  
+</body>
+</html>

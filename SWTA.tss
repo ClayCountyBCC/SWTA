@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<ArrayOfArrayOfArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ArrayOfArrayOfString>
+    <ArrayOfString>
+      <string>c:\users\mccartneyd\documents\visual studio 2015\projects\swta\swta\index.html</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>c:\users\mccartneyd\documents\visual studio 2015\projects\swta\swta\scripts\app\app.js</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>c:\users\mccartneyd\documents\visual studio 2015\projects\swta\swta\scripts\app\main\main.controller.js</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>c:\users\mccartneyd\documents\visual studio 2015\projects\swta\swta\scripts\app\data\appdata.service.js</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>c:\users\mccartneyd\documents\visual studio 2015\projects\swta\swta\content\main.css</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>c:\users\mccartneyd\documents\visual studio 2015\projects\swta\swta\models\appconstants.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>c:\users\mccartneyd\documents\visual studio 2015\projects\swta\swta\web.config</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>c:\users\mccartneyd\documents\visual studio 2015\projects\swta\swta\connectionstrings.config</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>c:\users\mccartneyd\documents\visual studio 2015\projects\swta\swta\models\parcelassessment.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>c:\users\mccartneyd\documents\visual studio 2015\projects\swta\swta\models\taxlog.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>c:\users\mccartneyd\documents\visual studio 2015\projects\swta\swta\models\taxdata.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\mccartneyd\Documents\Visual Studio 2015\Projects\SWTA\SWTA\Controllers\AssessmentsController.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>c:\users\mccartneyd\documents\visual studio 2015\projects\swta\swta\controllers\logcontroller.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>c:\users\mccartneyd\documents\visual studio 2015\projects\swta\swta\scripts\app\dialog\dialog.controller.js</string>
+      <string>c:\users\mccartneyd\documents\visual studio 2015\projects\swta\swta\scripts\app\dialog\dialog.controller.tmpl.html</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>c:\users\mccartneyd\documents\visual studio 2015\projects\swta\swta\models\mycache.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>c:\users\mccartneyd\documents\visual studio 2015\projects\swta\swta\scripts\app\detail\viewdetail.component.js</string>
+      <string>c:\users\mccartneyd\documents\visual studio 2015\projects\swta\swta\scripts\app\detail\viewdetail.component.tmpl.html</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>c:\users\mccartneyd\documents\visual studio 2015\projects\swta\swta\models\filter.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>c:\users\mccartneyd\documents\visual studio 2015\projects\swta\swta\app_start\webapiconfig.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>c:\users\mccartneyd\documents\visual studio 2015\projects\swta\swta\models\taxassessment.cs</string>
+    </ArrayOfString>
+  </ArrayOfArrayOfString>
+</ArrayOfArrayOfArrayOfString>

@@ -1,0 +1,247 @@
+﻿<div style="margin-top: .5em; margin-right: .5em;"
+     layout="row"
+     layout-align="center start"
+     layout-wrap>
+
+  <md-content layout="row"
+              layout-align="center start"
+              layout-wrap
+              flex="100"
+              class="md-inline-form">
+    <div layout="row"
+         layout-align="center start"
+         layout-padding
+         flex="100">
+      <md-input-container flex="15"
+                          class="md-block">
+        <label>PID</label>
+        <input readonly
+               ng-model="detail.td.PID"
+               type="text" />
+      </md-input-container>
+      <md-input-container flex="10"
+                          class="md-block">
+        <label>Tax District</label>
+        <input readonly
+               ng-model="detail.td.TaxDist"
+               type="number" />
+      </md-input-container>
+      <md-input-container flex="35"
+                          class="md-block">
+        <label>Owner</label>
+        <input flex="100"
+               readonly
+               ng-model="detail.td.OWNER_NAME"
+               type="text" />
+      </md-input-container>
+      <md-input-container flex="10"
+                          class="md-block">
+        <label>House #</label>
+        <input readonly
+               ng-model="detail.td.HOUSE_NO"
+               type="text" />
+      </md-input-container>
+      <md-input-container flex="30">
+        <label>Street</label>
+        <input readonly
+               ng-model="detail.td.STREET"
+               type="text" />
+      </md-input-container>
+    </div>
+    <div layout="row"
+         layout-align="center start"
+         layout-padding
+         flex="100">
+
+
+
+    </div>
+  </md-content>
+  <div flex="50"
+       layout="row"
+       layout-wrap
+       layout-align="center start">
+    <div flex="90"
+         layout-align="center center"
+         layout="row">
+    </div>
+    <div flex="90"
+         layout-align="center center"
+         layout="row">
+      <md-input-container flex="25"
+                          class="md-block">
+        <label>{{ detail.td.Prev_DataYear }} UseDesc</label>
+        <input readonly
+               ng-model="detail.td.Prev_USEDESC"
+               type="text" />
+      </md-input-container>
+      <md-input-container flex="25"
+                          class="md-block">
+        <label>{{ detail.td.Prev_DataYear }} Taxable</label>
+        <input readonly
+               ng-model="detail.td.Prev_Total_Taxable"
+               type="text" />
+      </md-input-container>
+
+      <md-input-container flex="25"
+                          class="md-block">
+        <label>{{ detail.td.DataYear }} UseDesc</label>
+        <input readonly
+               ng-model="detail.td.USEDESC"
+               type="text" />
+      </md-input-container>
+      <md-input-container flex="25"
+                          class="md-block">
+        <label>{{ detail.td.DataYear }} Taxable</label>
+        <input readonly
+               ng-model="detail.td.Total_Taxable"
+               type="text" />
+      </md-input-container>
+    </div>
+    <div class="md-whiteframe-z1"
+         style="background-color: lightyellow;"
+         flex="90"
+         layout-align="center center"
+         layout-wrap
+         layout="row">
+      <md-input-container flex="45"
+                          class="md-block">
+        <label>Assessed Collections</label>
+        <input ng-model="detail.td.Collected_Units"
+               type="number" />
+      </md-input-container>
+      <md-input-container flex="45"
+                          class="md-block">
+        <label>Assessed Units</label>
+        <input ng-model="detail.td.Assessed_Units"
+               type="number" />
+      </md-input-container>
+      <md-input-container class="md-block"
+                          flex="90">
+        <label>
+          Note to add
+        </label>
+        <input required
+               type="text"
+               md-maxlength="250"
+               ng-model="detail.noteToSave" />
+      </md-input-container>
+    </div>
+    <div style="color: red;"
+         layout="row"
+         layout-align="center center"
+         flex="90">
+      <h3 style="min-height: 22px;">
+        {{ detail.errorMessage }}
+      </h3>
+    </div>
+  </div>
+
+  <div style="height: 300px;"
+       class="md-whiteframe-z1"
+       layout="row"
+       layout-align="center start"
+       layout-wrap
+       flex="50">
+    <div style="border-bottom: 1px solid black;"
+         layout="row"
+         layout-align="center center"
+         flex="100">
+      <span style="text-align: center; font-size: larger; font-weight: bolder;"
+            flex="55">
+        Note
+      </span>
+      <span style="text-align: center; font-size: larger; font-weight: bolder;"
+            flex="20">
+        Date Added
+      </span>
+      <span style="text-align: center; font-size: larger; font-weight: bolder;"
+            flex="25">
+        Bld/Col/Asd
+      </span>
+    </div>
+
+    <md-content style="max-height: 280px;"
+                ng-show="detail.notes.length > 0"
+                layout="row"
+                layout-align="center start"
+                layout-wrap
+                flex="100">
+
+      <div class="row"
+           ng-repeat="n in detail.notes"
+           layout="row"
+           layout-align="center end"
+           flex="100">
+        <span flex="55">{{ n.Note }}</span>
+        <span flex="20">{{ n.addedOn_string}}</span>
+        <span ng-if="n.building_units !== undefined && n.building_units !== null"
+              flex="25">
+          {{ n.building_units }} / {{ n.collected_units }} / {{ n.assessed_units }}
+        </span>
+        <span ng-if="n.building_units === undefined || n.building_units === null"
+              flex="25">
+        </span>
+      </div>
+    </md-content>
+    <div ng-hide="detail.notes.length > 0"
+         layout="row"
+         layout-align="center start"
+         layout-padding
+         flex="100">
+      <h3 flex="100">No notes found.</h3>
+    </div>
+  </div>
+
+  <div style="margin-top: .5em; margin-bottom: .5em;"
+       layout="row"
+       layout-align="center center"
+       layout-wrap
+       flex="100">
+
+    <md-button ng-disabled="detail.i === 0 || detail.saving"
+               ng-click="detail.viewPrev()"
+               class="md-accent md-raised">
+      View Previous
+    </md-button>
+
+
+    <md-button ng-disabled="detail.saving"
+               ng-click="detail.saveData(detail.td,
+                          detail.td.Collected_Units, detail.td.Total_Taxable - 1,
+                          'HS '+ detail.currentYear)"
+               class="md-primary md-raised">
+      Update - Hardship
+    </md-button>
+
+    <md-button ng-disabled="detail.saving"
+               ng-click="detail.saveData(detail.td,
+                          detail.td.Collected_Units, detail.td.Total_Taxable - 1,
+                          'VX '+ detail.currentYear)"
+               class="md-primary md-raised">
+      Update - Veterans
+    </md-button>
+
+    <md-button ng-disabled="detail.saving"
+               ng-click="detail.saveData(detail.td,
+                          0, 0,
+                          'Reclassified Commercial ' + detail.currentYear)"
+               class="md-primary md-raised">
+      Update - Reclassifiation
+    </md-button>
+
+    <md-button ng-disabled="detail.saving"
+               ng-click="detail.saveData(detail.td,
+                          detail.td.Collected_Units, detail.td.Assessed_Units, '')"
+               class="md-primary md-hue-2 md-raised">
+      Update
+    </md-button>
+
+    <md-button ng-disabled="detail.i === detail.d.length - 1 || detail.saving"
+               ng-click="detail.viewNext()"
+               class="md-accent md-raised">
+      View Next
+    </md-button>
+  </div>
+
+</div>

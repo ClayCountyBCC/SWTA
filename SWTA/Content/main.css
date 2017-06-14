@@ -1,0 +1,29 @@
+﻿a, a:visited, a:link {
+  color: #795548;
+  text-decoration: underline;
+}
+body {
+  height: 100%;
+  width: 100%;
+}
+md-input-container {
+  margin-bottom: 0;
+}
+md-input-container label.darker {
+  color: rgba(0, 0, 0, 0.5);
+}
+div span, div h2 {
+  text-align: center; 
+}
+
+.row {
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+}
+md-toolbar.short {
+  height: 32px !important;
+  min-height: 32px;
+}
+md-input-container .md-input[disabled] {
+    color: rgba(0,0,0,0.4);
+}
