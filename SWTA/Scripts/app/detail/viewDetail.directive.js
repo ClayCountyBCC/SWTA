@@ -9,7 +9,7 @@
         },
         templateUrl: 'viewDetail.directive.tmpl.html',
         controller: 'DetailController as detail'
-      }
+      };
     })
     .controller('DetailController', ['appData', DetailController]);
 

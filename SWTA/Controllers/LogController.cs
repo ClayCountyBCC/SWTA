@@ -14,18 +14,8 @@ namespace SWTA.Controllers
     // GET: api/Log/5
     public List<TaxLog> Get(string id)
     {
-      return TaxData.getTaxLog(id);
-    }
-
-    // POST: api/Log
-    public void Post(TaxLog t)
-    {
-    }
-
-    // PUT: api/Log/5
-    //public void Put(int id, [FromBody]string value)
-    //{
-    //}
+      return TaxLog.Get(id);
+    }   
 
 
   }

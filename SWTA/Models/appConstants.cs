@@ -12,31 +12,26 @@ namespace SWTA.Models
     public const int toolsAppId = 20021;
     public const bool isProduction = false;
 
-    //public static DB Get_DB()
-    //{
-    //  return new DB(Get_ConnStr(), toolsAppId,
-    //          DB.DB_Error_Handling_Method.Send_Errors_To_Log_Only);
-    //}
-
     public static string Get_ConnStr()
     {
       return ConfigurationManager.ConnectionStrings[isProduction ? "SolidWaste" : "Local"].ConnectionString;
     }
 
-    //public static void Log(Exception e)
-    //{
-    //  Logging.Log(e, toolsAppId, "", Logging.LogType.Database);
-    //}
-
-    //public static void Log(Exception e, string query)
-    //{
-    //  Logging.Log(e, toolsAppId, query, Logging.LogType.Database);
-    //}
-
-    //public static void Log(string Message)
-    //{
-    //  Logging.Log(toolsAppId, "Error in Solid Waste Tax Assessment Application ", Message, "", "", Logging.LogType.Database);
-    //}
+    public enum queryType : int
+    {
+      normal = 0,
+      difference_build_assessed = 1,
+      difference_collected_assessed = 2,
+      difference_hardship = 3,
+      difference_veteran = 4,
+      difference_year_to_year = 5,
+      //difference_year_collected = 6,
+      //difference_year_assessed = 7,
+      new_this_year = 8,
+      removed_this_year = 9,
+      difference_reclassified = 10,
+      new_this_year_no_codate = 11
+    }
 
   }
 }

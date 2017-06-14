@@ -128,11 +128,8 @@
     </Compile>
     <Compile Include="Models\appConstants.cs" />
     <Compile Include="Models\ErrorLog.cs" />
-    <Compile Include="Models\filter.cs" />
-    <Compile Include="Models\myCache.cs" />
     <Compile Include="Models\TaxAssessment.cs" />
     <Compile Include="Models\TaxLog.cs" />
-    <Compile Include="Models\TaxData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

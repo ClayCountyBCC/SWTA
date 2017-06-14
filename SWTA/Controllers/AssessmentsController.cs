@@ -19,14 +19,14 @@ namespace SWTA.Controllers
       [FromUri] int assessed = -1, [FromUri] string notes = "",
       [FromUri] bool alreadyworked = false, [FromUri] int querytype = 0)
     {
-      return TaxData.getData(owner, road, parcel, district,
+      return TaxAssessment.Get(owner, road, parcel, district,
         usedesc, buildings, collected, assessed, notes, alreadyworked,
-        (TaxData.queryType)querytype);
+        (appConstants.queryType)querytype);
     }
 
     public TaxAssessment Get(string PID)
     {
-      return TaxData.getData(PID);
+      return TaxAssessment.Get(PID);
     }
 
     // POST: api/Assessments

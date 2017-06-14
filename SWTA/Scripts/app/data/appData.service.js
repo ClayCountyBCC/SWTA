@@ -63,7 +63,7 @@
 
     function fix(s, v, n) {
       if (v !== null && v.length > 0) {
-        if (s.length == 0) {
+        if (s.length === 0) {
           s = s + '?';
         } else {
           s = s + '&';
