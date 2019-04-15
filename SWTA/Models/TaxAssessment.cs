@@ -217,15 +217,15 @@ namespace SWTA.Models
       switch (qt)
       {
         case appConstants.queryType.difference_reclassified:
-          sbSql.Append("AND PID IN (SELECT DISTINCT PID FROM TaxLog WHERE Note like '%Reclassified%') ");
+          sbSql.Append("AND PID IN (SELECT DISTINCT PID FROM TaxLog WHERE Note like '%Reclassified%' AND YEAR(addedOn) >= dbo.GetMaxYear() - 1) ");
           break;
 
         case appConstants.queryType.difference_hardship:
-          sbSql.Append("AND PID IN (SELECT DISTINCT PID FROM TaxLog WHERE (Note like '%HS%' OR Note like '%HX%') AND Note NOT LIKE '%CoDate%') ");
+          sbSql.Append("AND PID IN (SELECT DISTINCT PID FROM TaxLog WHERE (Note like '%HS%' OR Note like '%HX%') AND YEAR(addedOn) >= dbo.GetMaxYear() - 1) ");
           break;
 
         case appConstants.queryType.difference_veteran:
-          sbSql.Append("AND PID IN (SELECT DISTINCT PID FROM TaxLog WHERE Note like '%VX%' AND Note NOT LIKE '%CoDate%') ");
+          sbSql.Append("AND PID IN (SELECT DISTINCT PID FROM TaxLog WHERE Note like '%VX%' AND YEAR(addedOn) >= dbo.GetMaxYear() - 1) ");
           break;
 
         case appConstants.queryType.difference_build_assessed:

@@ -62,7 +62,8 @@
 
       main.showProgress = true;
 
-      appData.getAssessments(main.filterOwner,
+      appData.getAssessments(
+        main.filterOwner,
         main.filterRoad,
         main.filterParcel,
         main.filterDistrict === null ? '' : main.filterDistrict,
@@ -111,9 +112,6 @@
           main.updateData();
         });
     };
-
-
-
   }
 
 })();

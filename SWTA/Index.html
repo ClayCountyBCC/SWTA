@@ -97,11 +97,6 @@
           </md-button>
         </md-item>
         <md-item>
-          <md-button ng-click="main.filterQuery('New Parcels - No CoDate', 11)">
-            New Parcels - No CoDate
-          </md-button>
-        </md-item>
-        <md-item>
           <md-button ng-click="main.filterQuery('Parcels removed this year', 9)">
             Parcels not found this year
           </md-button>
@@ -127,7 +122,7 @@
                layout-padding>
         <md-item>
           <a target="_blank"
-             href="http://claybccmscsql/ReportServer/Pages/ReportViewer.aspx?%2FSolidWasteReports%2FSolidWasteRoll">
+             href="http://claybccreport/reports/report/Solid%20Waste/SolidWasteRoll">
             Solid Waste Roll
           </a>
         </md-item>
@@ -312,7 +307,7 @@
           </span>
           <span flex="10">
             <a target="_blank"
-               ng-href="http://qpublic6.qpublic.net/fl_display_dw.php?county=fl_clay&KEY={{ ad.PIN_DSP }}">
+               ng-href="https://qpublic.schneidercorp.com/Application.aspx?AppID=830&LayerID=15008&PageTypeID=4&KeyValue={{ ad.PIN_DSP }}">
               {{ ad.USEDESC }}
             </a>
           </span>
