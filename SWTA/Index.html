@@ -4,7 +4,7 @@
   <title>Solid Waste Tax Assessment</title>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=11">
-  <script src="Scripts/angular.min.js"></script>  
+  <script src="Scripts/angular.min.js"></script>
   <link href="Content/angular-material.min.css" rel="stylesheet" />
   <link href="Content/main.css" rel="stylesheet" />
 </head>
@@ -36,7 +36,7 @@
       </span>
 
       <h2 ng-if="!main.showProgress && main.currentFilter.length > 0"
-            flex>
+          flex>
         Filtering By - {{ main.currentFilter }}
       </h2>
       <md-button ng-click="main.showReports()">
@@ -122,21 +122,21 @@
                layout-padding>
         <md-item>
           <a target="_blank"
-             href="http://claybccreport/reports/report/Solid%20Waste/SolidWasteRoll">
+             href="http://claybccrpt/reports/report/Environmental%20Services/SolidWasteRoll">
             Solid Waste Roll
           </a>
         </md-item>
         <md-item>
           <a target="_blank"
-             href="http://claybccreport/reports/report/Solid%20Waste/SolidWasteRoll%20(Not%20for%20Public%20Use)">
-            Solid Waste Un-Redacted
+             href="http://claybccrpt/reports/report/Environmental%20Services/SolidWasteRoll%20(Internal)">
+            Solid Waste (Internal)
           </a>
         </md-item>
-        
+
         <md-item>
           <a target="_blank"
-             href="http://claybccreport/Reports/report/Solid%20Waste/SolidWasteCO">
-            CO Data Report
+             href="http://claybccrpt/reports/report/Environmental%20Services/Paid%20Solid%20Waste%20Fees">
+            Paid Solid Waste Fees
           </a>
         </md-item>
       </md-list>
@@ -145,13 +145,13 @@
 
   </md-sidenav>
 
-  <div style="height: calc(100% - 64px); 
+  <div style="height: calc(100% - 64px);
               width: 100%;"
-              layout="row"
-              layout-align="center start"
-              layout-wrap
-              flex="100">
-    
+       layout="row"
+       layout-align="center start"
+       layout-wrap
+       flex="100">
+
     <form layout="row"
           layout-align="center start"
           flex="100"
@@ -264,7 +264,7 @@
          class="md-whiteframe-z1"
          layout="row"
          layout-align="center start"
-         layout-wrap         
+         layout-wrap
          flex="90">
 
       <div style="border-bottom: 1px solid black;"
@@ -320,7 +320,7 @@
           </span>
           <span flex="10">
             <a target="_blank"
-               ng-href="https://qpublic.schneidercorp.com/Application.aspx?AppID=830&LayerID=15008&PageTypeID=4&KeyValue={{ ad.PIN_DSP }}">
+               href="https://qpublic.schneidercorp.com/Application.aspx?AppID=830&LayerID=15008&PageTypeID=4&KeyValue={{ ad.PIN_DSP }}">
               {{ ad.USEDESC }}
             </a>
           </span>
@@ -339,7 +339,7 @@
           </span>
         </div>
       </md-virtual-repeat-container>
-      
+
 
 
     </div>
@@ -353,6 +353,6 @@
   <script src="Scripts/app/data/appData.service.js"></script>
   <script src="Scripts/app/detail/viewDetail.component.js"></script>
   <script src="Scripts/app/dialog/dialog.controller.js"></script>
-  
+
 </body>
 </html>
