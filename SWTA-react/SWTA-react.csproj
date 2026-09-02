@@ -132,7 +132,8 @@
   <ItemGroup>
     <Folder Include="ClientApp\" />
     <Folder Include="ClientApp\src\" />
-    <Content Include="ClientApp\dist\**\*" />
+    <Content Include="assets\**\*" />
+    <Content Include="Seal400Transparent.png" />
     <Content Include="..\ClientApp\index.html">
       <Link>ClientApp\index.html</Link>
     </Content>
@@ -154,18 +155,17 @@
   </ItemGroup>
   <PropertyGroup>
     <ReactClientSourceDir>$(MSBuildProjectDirectory)\..\ClientApp</ReactClientSourceDir>
-    <ReactClientHostDir>$(MSBuildProjectDirectory)\ClientApp</ReactClientHostDir>
+    <ReactClientHostDir>$(MSBuildProjectDirectory)</ReactClientHostDir>
   </PropertyGroup>
   <Target Name="BuildReactClient" BeforeTargets="Build" Condition="Exists('$(ReactClientSourceDir)\package.json')">
     <Message Importance="high" Text="Building the React client before the web project builds." />
     <Exec WorkingDirectory="$(ReactClientSourceDir)" Command="npm run build" />
     <ItemGroup>
-      <ReactClientDistFiles Include="$(ReactClientSourceDir)\dist\**\*" />
+      <ReactClientDistFiles Include="$(ReactClientSourceDir)\dist\**\*" Exclude="$(ReactClientSourceDir)\dist\index.html" />
     </ItemGroup>
-    <MakeDir Directories="$(ReactClientHostDir)\dist" />
     <Copy
       SourceFiles="@(ReactClientDistFiles)"
-      DestinationFiles="@(ReactClientDistFiles-&gt;'$(ReactClientHostDir)\dist\%(RecursiveDir)%(Filename)%(Extension)')"
+      DestinationFiles="@(ReactClientDistFiles-&gt;'$(ReactClientHostDir)\%(RecursiveDir)%(Filename)%(Extension)')"
       SkipUnchangedFiles="true" />
   </Target>
   <PropertyGroup>

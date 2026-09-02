@@ -1,53 +1,14 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#143d64" />
-  <meta http-equiv="refresh" content="0; url=ClientApp/dist/index.html" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#17324d" />
   <title>SWTA-react</title>
-  <style>
-    :root {
-      color-scheme: light;
-      font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-      color: #1e2a35;
-      background: #edf3f9;
-    }
-
-    body {
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      margin: 0;
-      background: linear-gradient(180deg, #ffffff 0%, #edf3f9 100%);
-    }
-
-    main {
-      width: min(560px, calc(100% - 48px));
-      padding: 32px;
-      border: 1px solid #d7e1ec;
-      border-radius: 18px;
-      background: #ffffff;
-      box-shadow: 0 18px 40px rgba(20, 61, 100, 0.12);
-      text-align: center;
-    }
-
-    h1 {
-      margin: 0;
-      color: #143d64;
-    }
-
-    a {
-      color: #143d64;
-      font-weight: 700;
-    }
-  </style>
+  <link rel="stylesheet" href="./assets/swta-react.css" />
 </head>
 <body>
-  <main>
-    <h1>SWTA-react</h1>
-    <p>Opening the React client.</p>
-    <p><a href="ClientApp/dist/index.html">Open the React client</a></p>
-  </main>
+  <div id="root"></div>
+  <script type="module" src="./assets/swta-react.js"></script>
 </body>
 </html>

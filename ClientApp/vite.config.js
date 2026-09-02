@@ -17,6 +17,17 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
-    emptyOutDir: true
+    emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        entryFileNames: 'assets/swta-react.js',
+        chunkFileNames: 'assets/[name].js',
+        assetFileNames: (assetInfo) => (
+          assetInfo.name?.endsWith('.css')
+            ? 'assets/swta-react.css'
+            : 'assets/[name][extname]'
+        )
+      }
+    }
   }
 });
