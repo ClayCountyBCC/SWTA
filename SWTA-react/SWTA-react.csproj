@@ -56,9 +56,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
@@ -130,8 +129,6 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ClientApp\" />
-    <Folder Include="ClientApp\src\" />
     <Content Include="assets\**\*" />
     <Content Include="Seal400Transparent.png" />
     <Content Include="..\ClientApp\index.html">
@@ -163,10 +160,7 @@
     <ItemGroup>
       <ReactClientDistFiles Include="$(ReactClientSourceDir)\dist\**\*" Exclude="$(ReactClientSourceDir)\dist\index.html" />
     </ItemGroup>
-    <Copy
-      SourceFiles="@(ReactClientDistFiles)"
-      DestinationFiles="@(ReactClientDistFiles-&gt;'$(ReactClientHostDir)\%(RecursiveDir)%(Filename)%(Extension)')"
-      SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(ReactClientDistFiles)" DestinationFiles="@(ReactClientDistFiles->'$(ReactClientHostDir)\%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
   </Target>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
