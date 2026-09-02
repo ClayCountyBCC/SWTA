@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import AppearancePanel from '../appearance/AppearancePanel';
 import ParcelDetailDialog from '../parcelDetail/ParcelDetailDialog';
 import { getAssessmentsPage, getEnvironment } from '../../services/solidWasteReactApi';
 
@@ -52,6 +53,7 @@ function SearchPage() {
   const [appliedFilter, setAppliedFilter] = useState('');
   const [showFilters, setShowFilters] = useState(true);
   const [showReports, setShowReports] = useState(false);
+  const [showAppearance, setShowAppearance] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [isProduction, setIsProduction] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -244,6 +246,14 @@ function SearchPage() {
     loadRows(nextFilters, filter.label, 1, pageSize, true);
   }
 
+  function clearQuickFilter() {
+    const nextFilters = { ...draftFilters, queryType: 0 };
+    setDraftFilters(nextFilters);
+    setShowReports(false);
+    clearPageCache();
+    loadRows(nextFilters, '', 1, pageSize, true);
+  }
+
   function openParcel(index) {
     setSelectedIndex(index);
   }
@@ -345,14 +355,27 @@ function SearchPage() {
 
     return (
       <nav className={`pagination ${position === 'top' ? 'pagination--top' : ''}`} aria-label={`Parcel result pages (${position})`}>
-        <span className="pagination__summary">Page {page} of {totalPages}</span>
-        <div className="pagination__actions">
+        <div className="pagination__actions pagination__actions--left">
           <button type="button" onClick={() => goToPage(1)} disabled={loading || page === 1}>
             First
           </button>
           <button type="button" onClick={() => goToPage(page - 1)} disabled={loading || page === 1}>
             Previous
           </button>
+        </div>
+        <div className="pagination__summary">
+          <strong className="pagination__page-label">Page {page} of {totalPages}</strong>
+          <span className="pagination__range">Showing {firstResult}-{lastResult}</span>
+          <label className="page-size-control">
+            <span>Rows per page</span>
+            <select value={pageSize} onChange={handlePageSizeChange} disabled={loading}>
+              {resultPageSizeOptions.map((option) => (
+                <option key={option} value={option}>{option}</option>
+              ))}
+            </select>
+          </label>
+        </div>
+        <div className="pagination__actions pagination__actions--right">
           <button type="button" onClick={() => goToPage(page + 1)} disabled={loading || page === totalPages || !hasNextPage}>
             Next
           </button>
@@ -365,7 +388,7 @@ function SearchPage() {
   }
 
   return (
-    <div className="app-frame">
+    <div className={`app-frame ${!isProduction ? 'app-frame--development' : ''}`}>
       {!isProduction ? (
         <div className="development-banner" role="status" aria-live="polite">
           <strong>Development Environment</strong>
@@ -375,9 +398,8 @@ function SearchPage() {
 
       <header className="app-header">
         <div className="app-header__brand">
-          <div className="brand-mark" aria-hidden="true">SW</div>
+          <img className="brand-seal" src="./Seal400Transparent.png" alt="Clay County Florida seal" />
           <div>
-            <p className="app-header__eyebrow">SWTA-react</p>
             <h1>Solid Waste Tax Assessment</h1>
           </div>
         </div>
@@ -386,7 +408,10 @@ function SearchPage() {
           <button
             type="button"
             className="button button--header"
-            onClick={() => setShowReports((current) => !current)}
+            onClick={() => {
+              setShowReports((current) => !current);
+              setShowAppearance(false);
+            }}
             aria-expanded={showReports}
           >
             Reports
@@ -394,10 +419,25 @@ function SearchPage() {
           <button
             type="button"
             className="button button--header"
-            onClick={() => setShowFilters((current) => !current)}
+            onClick={() => {
+              setShowFilters((current) => !current);
+              setShowAppearance(false);
+            }}
             aria-expanded={showFilters}
           >
             Filters
+          </button>
+          <button
+            type="button"
+            className="button button--header"
+            onClick={() => {
+              setShowAppearance((current) => !current);
+              setShowReports(false);
+            }}
+            aria-expanded={showAppearance}
+            aria-controls="appearance-panel"
+          >
+            Appearance
           </button>
         </div>
       </header>
@@ -419,21 +459,9 @@ function SearchPage() {
         </aside>
       ) : null}
 
-      <main className="app-content">
-        <section className="page-intro">
-          <div>
-            <p className="section-kicker">Assessment workspace</p>
-            <h2>{appliedFilter || 'Parcel search'}</h2>
-            <p className="page-intro__description">
-              Search the current assessment roll, review parcel history, and update exemptions from the parcel detail dialog.
-            </p>
-          </div>
-          <div className="record-summary" aria-live="polite">
-            <span className="record-summary__value">{loading ? '...' : totalCount}</span>
-            <span className="record-summary__label">records</span>
-          </div>
-        </section>
+      {showAppearance ? <AppearancePanel onClose={() => setShowAppearance(false)} /> : null}
 
+      <main className="app-content">
         {showFilters ? (
           <section className="filter-card" aria-label="Parcel filters">
             <div className="filter-card__heading">
@@ -504,11 +532,33 @@ function SearchPage() {
             <h3>Quick filters</h3>
           </div>
           <div className="quick-filter-list">
-            {quickFilters.map((filter) => (
-              <button key={filter.label} type="button" className="quick-filter" onClick={() => applyQuickFilter(filter)} disabled={loading}>
-                {filter.label}
+            {quickFilters.map((filter) => {
+              const isActive = appliedFilter === filter.label
+                && appliedFilters.queryType === filter.queryType;
+
+              return (
+                <button
+                  key={filter.label}
+                  type="button"
+                  className={`quick-filter ${isActive ? 'quick-filter--active' : ''}`}
+                  onClick={() => applyQuickFilter(filter)}
+                  disabled={loading}
+                  aria-pressed={isActive}
+                >
+                  {filter.label}
+                </button>
+              );
+            })}
+            {appliedFilter ? (
+              <button
+                type="button"
+                className="quick-filter quick-filter--clear"
+                onClick={clearQuickFilter}
+                disabled={loading}
+              >
+                Clear saved view
               </button>
-            ))}
+            ) : null}
           </div>
         </section>
 
@@ -520,22 +570,9 @@ function SearchPage() {
               <p className="section-kicker">Current results</p>
               <h3>Parcels</h3>
             </div>
-            <div className="results-card__controls">
-              <span className="results-card__status">
-                {loading
-                  ? 'Loading parcel data...'
-                  : hasSearched
-                    ? `Showing ${firstResult}-${lastResult} of ${totalCount}`
-                    : 'Search to load parcel data'}
-              </span>
-              <label className="page-size-control">
-                <span>Rows per page</span>
-                <select value={pageSize} onChange={handlePageSizeChange} disabled={loading}>
-                  {resultPageSizeOptions.map((option) => (
-                    <option key={option} value={option}>{option}</option>
-                  ))}
-                </select>
-              </label>
+            <div className="results-card__record-count" aria-live="polite">
+              <span className="results-card__record-count-value">{loading ? '...' : totalCount}</span>
+              <span className="results-card__record-count-label">records</span>
             </div>
           </div>
 

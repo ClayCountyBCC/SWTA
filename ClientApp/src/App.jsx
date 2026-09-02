@@ -1,7 +1,12 @@
 import SearchPage from './features/search/SearchPage';
+import { ThemeProvider } from './theme/ThemeProvider';
 
-function App() {
-  return <SearchPage />;
+function App({ initialAppearance }) {
+  return (
+    <ThemeProvider initialAppearance={initialAppearance}>
+      <SearchPage />
+    </ThemeProvider>
+  );
 }
 
 export default App;
